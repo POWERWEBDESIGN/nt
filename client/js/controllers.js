@@ -32,8 +32,11 @@ myApp.controller("DataFactoryList", function ($scope, $modal, dataFactory, Notif
     $scope.dataList = [];
     $scope.tableList = [ {name: 'events', label: 'Zdarzenia'}, 
                          {name: 'eventTypes', label: 'Typy zdarzeń'}, 
+                         {name: 'usersGroups', label: 'Grupy użytkowników'},
                          {name: 'users', label: 'Użytkownicy'},
                          {name: 'userTypes', label: 'Typy użytkowników'}, 
+                         {name: 'externalSystem', label: 'System zewnętrzny'},
+                         {name: 'notificationChannel', label: 'Kanał powiadomień'},
                          {name: 'category', label: 'Kategorie'}];
         
     $scope.getItems = function (type) {
@@ -50,6 +53,12 @@ myApp.controller("DataFactoryList", function ($scope, $modal, dataFactory, Notif
         if (type == 'users') {
             dataFactory.get('userTypes').then(function (data) {
                 $scope.userTypes = data.data;
+            });
+        }
+
+        if (type == 'externalSystem') {
+            dataFactory.get('notificationChannel').then(function (data) {
+                $scope.notificationChannel = data.data;
             });
         }
 
@@ -92,7 +101,11 @@ myApp.controller("DataFactoryList", function ($scope, $modal, dataFactory, Notif
                 },
                 userTypes: function () {
                     return $scope.userTypes;
+                },
+                notificationChannel: function () {
+                    return $scope.notificationChannel;
                 }
+
             }
         });
 
@@ -120,11 +133,12 @@ myApp.controller("DataFactoryList", function ($scope, $modal, dataFactory, Notif
     }
 });
 
-myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, formData, eventTypes, userTypes) {
+myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, formData, eventTypes, userTypes, notificationChannel) {
 
     $scope.formData = formData;
     $scope.eventTypes = eventTypes;
     $scope.userTypes = userTypes;
+    $scope.notificationChannel = notificationChannel;
     $scope.save = function () {
         $modalInstance.close($scope.formData);
     };

@@ -58,6 +58,19 @@ var UserTypesModel = require('../models/userTypes');
     UserTypesModel.methods(['get', 'post', 'put', 'delete']);
     UserTypesModel.register(router, '/api/v1/userTypes');
 
+//Model NotificationChannel
+var NotificationChannelModel = require('../models/notificationChannel');
+    NotificationChannelModel.methods(['get', 'post', 'put', 'delete']);
+    NotificationChannelModel.register(router, '/api/v1/notificationCHannel');
 
+//Model ExternalSystem
+var ExternalSystemModel = require('../models/externalSystem');
+    ExternalSystemModel.methods(['get', 'post', 'put', 'delete']);
+    ExternalSystemModel.register(router, '/api/v1/externalSystem');
+
+//Model UsersGroups
+var UsersGroups = require('../models/usersGroups');
+    UsersGroups.methods(['get', 'post', 'put', 'delete']);
+    UsersGroups.register(router, '/api/v1/usersGroups');
 
 module.exports = router;

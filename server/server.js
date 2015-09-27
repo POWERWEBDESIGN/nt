@@ -13,9 +13,23 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
+var fs = require('fs');
+var FileStreamRotator = require('file-stream-rotator');
 
 var app = express();
 app.use(logger('dev'));
+
+var logDirectory = __dirname + '/log';
+    fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+var accessLogStream = FileStreamRotator.getStream({
+    filename: logDirectory + '/%DATE%-access.log',
+    frequency: 'daily',
+    date_format: 'YYYYMMDD',
+    verbose: false
+});
+app.use(logger('combined', {stream: accessLogStream}));
+
+
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));
