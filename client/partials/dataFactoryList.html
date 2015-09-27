@@ -1,0 +1,11 @@
+
+<div class="container" ng-controller="DataFactoryList">
+    <div class="page-header">
+        <h3>Notifier RestApi</h3>
+    </div> 
+    <tabset>
+        <tab ng-repeat="item in tableList" heading="{{item.label}}" ng-click="getItems(item.name)" tab-include="partials/dbList.html"></tab>
+    </tabset>
+    
+
+</div>
